@@ -16,6 +16,7 @@ const GlobalStyles = createGlobalStyle`
 
 body {
     font-family: "Poppins", sans-serif;
+    min-height:100vh;
 }
 
 button {

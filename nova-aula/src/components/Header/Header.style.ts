@@ -11,7 +11,7 @@ export const HeaderTop = styled.section`
     font-weight: bold;
   }
 
-  div {
+  .auth_nav{
     display: flex;
     gap: 1rem;
   }
@@ -27,15 +27,16 @@ export const HeaderCenter = styled.section`
   justify-content: space-between;
   padding: 1rem 10%;
 
-  div {
+  .input_box {
     display: flex;
     width: 60%;
   }
-  div button {
+  .input_box button {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
+    font-size:1.5rem;
   }
-  div input {
+  .input_box input{
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
   }
@@ -43,15 +44,19 @@ export const HeaderCenter = styled.section`
 
 export const Nav = styled.nav`
 display:flex;
+gap: 2rem;
 
 button {
   display:flex;
   align-items:center;
-  gap: .5rem;
+  gap: 1rem;
+  color: ${({theme}) => theme.colors.gray[400]};
+  background-color: transparent;
+  padding: 0;
 }
 button sgv{
-  width:35px;
-  height:35px;
+  width:32px;
+  height:32px;
 }
 
-`
+`;
