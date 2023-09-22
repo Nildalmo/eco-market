@@ -6,7 +6,7 @@ export interface iBannerCardProps {
   text: string;
   link: string;
   color: "orange" | "green";
-}
+};
 
 const BannerCard: React.FC<iBannerCardProps> = ({ src, text, link, color }) => {
   return (
