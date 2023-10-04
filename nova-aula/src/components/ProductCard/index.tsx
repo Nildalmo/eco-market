@@ -1,3 +1,4 @@
+import { moneyFormat } from "@/utils/moneyFormat";
 import {
   Card,
   CardBody,
@@ -6,9 +7,13 @@ import {
   Heading,
   Text,
   StyleProps,
+  useDisclosure,
 } from "@chakra-ui/react";
+import { ProductModal } from "../ProductModal";
+
 
 export interface iProductCardProps {
+  id: number;
   nome: string;
   preco: number;
   descricao: string;
@@ -17,42 +22,53 @@ export interface iProductCardProps {
 }
 
 export const ProductCard: React.FC<iProductCardProps> = ({
+  id,
   nome,
   preco,
   descricao,
   image,
   direction,
 }) => {
-  function moneyFormat(preco: number): import("react").ReactNode {
-    throw new Error("Function not implemented.");
-  }
-
+  const { isOpen, onClose, onOpen } = useDisclosure();
+  
   return (
-    <Card
-      maxW={direction === "row" ? "100%" : "sm"}
-      _hover={{ transform: "scale(1.01)" }}
-      transition="all .3s"
-      as="li"
-      direction={direction}
-    >
-      {direction === "row" && (
-        <Image
-          objectFit="cover"
-          src={image}
-          alt={`Imagem do produto: ${nome}`}
-          title={nome}
-        />
-      )}
-      <CardBody>
-        {direction !== "row" && (
-          <Image src={image} alt={`Imagem do produto: ${nome}`} title={nome} />
+    <>
+      <ProductModal isOpen={isOpen} OnClose={onClose} id={id} />
+      <Card
+        maxW={direction === "row" ? "100%" : "sm"}
+        _hover={{ transform: "scale(1.01)" }}
+        transition="all .3s"
+        as="li"
+        direction={direction}
+        w="100%"
+        cursor="pointer"
+        onClick={onOpen}
+      >
+        {direction === "row" && (
+          <Image
+            objectFit="cover"
+            maxW={{ base: "100%" }}
+            src={image}
+            alt={`Imagem do produto: ${nome}`}
+            title={nome}
+          />
         )}
-        <Stack>
-          <Heading size="md">{nome}</Heading>
-          <Text color="green.300">{moneyFormat(preco)}</Text>
-        </Stack>
-      </CardBody>
-    </Card>
+        <CardBody>
+          {direction !== "row" && (
+            <Image
+              src={image}
+              alt={`Imagem do produto: ${nome}`}
+              title={nome}
+            />
+          )}
+          <Stack>
+            <Heading size="md">{nome}</Heading>
+            <Text color="green.300">{moneyFormat(preco)}</Text>
+
+          </Stack>
+        </CardBody>
+      </Card>
+    </>
   );
 };
 

@@ -6,13 +6,14 @@ export interface iBannerCardProps {
   text: string;
   link: string;
   color: "orange" | "green";
-};
+  
+}
 
 const BannerCard: React.FC<iBannerCardProps> = ({ src, text, link, color }) => {
   return (
     <Flex
       position="relative"
-      w={{base: "100%", md:"50%"}}
+      w={{ base: "100%", md: "50%" }}
       bgColor={color === "orange" ? "orange.100" : "green.200"}
       h="200px"
       p="1rem"

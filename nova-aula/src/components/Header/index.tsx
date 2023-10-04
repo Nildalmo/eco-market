@@ -1,11 +1,10 @@
 "use client";
 
 import { Button } from "../Button";
-import Input from "../Input";
 import { StyleLink } from "../Link";
 import * as S from "./Header.style";
-import { AiOutlineSearch, AiFillInfoCircle } from "react-icons/ai";
 import { BiUserCircle, BiSolidCartAlt, BiLogOutCircle } from "react-icons/bi";
+
 import {
   Menu,
   MenuButton,
@@ -14,17 +13,22 @@ import {
   MenuList,
   MenuItem,
   IconButton as icoChackra,
-  Heading,Text
+  Heading,
+  Text,
+  useDisclosure,
 } from "@chakra-ui/react";
-import { useAuth } from "@/contexts/AuthContext";
-import IconButton from "../iconButtom";
+
 import Link from "next/link";
+import Cart from "../Cart";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Header: React.FC = () => {
   const { isloged, user, logOut } = useAuth();
-  console.log(user);
+  const { isOpen, onClose, onOpen } = useDisclosure();
+
   return (
     <S.Header>
+      <Cart isOpen={isOpen} onClose={onClose} />
       <S.HeaderTop>
         <p>Welcome to Eco Market</p>
 
@@ -40,9 +44,13 @@ const Header: React.FC = () => {
         </div>
       </S.HeaderTop>
       <S.HeaderCenter>
-  <Heading fontSize="2xl">Food<Text as="span" color="orange.100">Market</Text>
-  </Heading>
-           
+        <Heading fontSize="2xl">
+          Food
+          <Text as="span" color="orange.100">
+            Market
+          </Text>
+        </Heading>
+
         <S.Nav>
           <Menu>
             <MenuButton
@@ -71,7 +79,7 @@ const Header: React.FC = () => {
               )}
             </MenuList>
           </Menu>
-          <Button variant="unstyled">
+          <Button variant="unstyled" onClick={onOpen}>
             <BiSolidCartAlt />
             Carrinho
           </Button>

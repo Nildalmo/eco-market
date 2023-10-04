@@ -1,6 +1,5 @@
 "use client";
 import Input from "@/components/Input";
-import { useRouter } from "next/navigation";
 import { Form } from "@/components/Form";
 import React from "react";
 import { Button } from "@/components/Button";
@@ -48,8 +47,7 @@ export default function Login() {
 
       <Divider />
       <small>
-        não possui  uma conta?{" "}
-        <StyleLink href="/resiter">Cadastre-se</StyleLink>
+        não possui uma conta? <StyleLink href="/resiter">Cadastre-se</StyleLink>
       </small>
     </Form>
   );

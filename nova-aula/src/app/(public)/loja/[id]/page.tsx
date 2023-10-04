@@ -1,6 +1,6 @@
 "use client";
 
-import ProductCard from "@/components/ProductCard";
+import { ProductCard } from "@/components/ProductCard";
 import StarRating from "@/components/StarRating";
 import { moneyFormat } from "@/utils/moneyFormat";
 import {
@@ -18,6 +18,7 @@ import { AiFillDollarCircle } from "react-icons/ai";
 
 const products = [
   {
+    id: 1,
     nome: "mequi mil",
     image: "https://placehold.co/398x157",
     preco: 15.78,
@@ -25,6 +26,7 @@ const products = [
       "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo odit fugiat assumenda aspernatur, distinctio dicta beatae, repellendus quam illo porro earum repellat dolore, pariatur laboriosam deserunt nihil quaerat natus officia. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo odit fugiat assumenda aspernatur, distinctio dicta beatae, repellendus quam illo porro earum repellat dolore, pariatur laboriosam deserunt nihil quaerat natus officia.",
   },
   {
+    id: 2,
     nome: "mequi mil",
     image: "https://placehold.co/398x157",
     preco: 15.78,
@@ -32,6 +34,7 @@ const products = [
       "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo odit fugiat assumenda aspernatur, distinctio dicta beatae, repellendus quam illo porro earum repellat dolore, pariatur laboriosam deserunt nihil quaerat natus officia. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo odit fugiat assumenda aspernatur, distinctio dicta beatae, repellendus quam illo porro earum repellat dolore, pariatur laboriosam deserunt nihil quaerat natus officia.",
   },
   {
+    id: 3,
     nome: "mequi mil",
     image: "https://placehold.co/398x157",
     preco: 15.78,
@@ -64,8 +67,14 @@ export default function Loja({ params: { id } }: iLojaProps) {
     })
   );
   return (
-    <Flex bg="gray.50" direction="column" align="center" mt="2rem" minH="100vh">
+    <Flex
+      bg="gray.50"
+      direction="column"
+      align="center"
+      mt="1rem"
+      minH="100vh"
       p={{ base: "0 5%", lg: "17%" }}
+    >
       <Flex as="header" flexDir="column">
         <Image
           src="https://placehold.co/1200x250"
@@ -92,28 +101,32 @@ export default function Loja({ params: { id } }: iLojaProps) {
           </Flex>
         </Flex>
       </Flex>
-      <Box mt="2rem">
-        <Heading fontSize="lg">Destaques</Heading>
-        <Divider bg="gray.500" />
-        <Flex
-          direction={{ base: "column", md: "row" }}
-          gap={4}
-          wrap="wrap"
-          mt={5}
-        >
-          {products?.map((product, index) => (
-            <ProductCard {...product} key={index} />
-          ))}
-        </Flex>
-      </Box>
-      <Box mt="2rem">
-        <Heading fontSize="lg">Produtos</Heading>
-        <Divider bg="gray.500" />
-        <Flex direction="column" gap={4} wrap="wrap" mt={2}>
-          {products?.map((product, index) => (
-            <ProductCard {...product} key={index} />
-          ))}
-        </Flex>
+      <Box>
+        <Box mt="2rem">
+          <Heading fontSize="lg">Destaques</Heading>
+          <Divider bg="gray.500" />
+          <Flex
+            direction={{ base: "column", md: "row" }}
+            gap={4}
+            wrap="wrap"
+            mt={5}
+          >
+            {products?.map((product, index) => (
+              <ProductCard {...product} key={index} />
+            ))}
+          </Flex>
+        </Box>
+
+        <Box mt="2rem" w="100%">
+          <Heading fontSize="lg">Produtos</Heading>
+          <Divider bg="gray.500" />
+          
+          <Flex direction="column" gap={4} wrap="wrap" mt={5}>
+            {products?.map((product, index) => (
+              <ProductCard direction="row" {...product} key={index} />
+            ))}
+          </Flex>
+        </Box>
       </Box>
     </Flex>
   );
