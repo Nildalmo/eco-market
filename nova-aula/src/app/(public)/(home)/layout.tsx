@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import Header from "@/components/Header"
-import Providers from "@/app/providers"
-import GlobalStyles from "@/styles/global"
-import StyledComponentsRegistry from '@/app/registry';
+import Header from "@/components/Header";
+import Providers from "@/app/providers";
+import GlobalStyles from "@/styles/global";
+import StyledComponentsRegistry from "@/app/registry";
 import { ToastContainer } from "react-toastify";
 import Footer from "@/components/Footer";
 
@@ -15,8 +15,8 @@ export const metadata = {
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
-}) { 
+  children: React.ReactNode;
+}) {
   return (
     <html lang="pt-br">
       <body>
@@ -32,13 +32,10 @@ export default function RootLayout({
             <GlobalStyles />
             <Header />
             {children}
-            <Footer/>
+            <Footer />
           </Providers>
         </StyledComponentsRegistry>
       </body>
     </html>
   );
 }
-
-
-

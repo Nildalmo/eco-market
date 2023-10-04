@@ -1,79 +1,133 @@
 "use client";
 
-import StarRating from '@/components/StarRating';
-import { moneyFormat } from '@/utils/moneyFormat';
-import { Box, Button, Flex,Heading,Image,Text, Icon} from '@chakra-ui/react';
-import {use} from "react";
-import { AiFillDollarCircle } from 'react-icons/ai';
+import { ProductCard } from "@/components/ProductCard";
+import StarRating from "@/components/StarRating";
+import { moneyFormat } from "@/utils/moneyFormat";
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Image,
+  Text,
+  Icon,
+  Divider,
+} from "@chakra-ui/react";
+import { use } from "react";
+import { AiFillDollarCircle } from "react-icons/ai";
 
+const products = [
+  {
+    id: 1,
+    nome: "mequi mil",
+    image: "https://placehold.co/398x157",
+    preco: 15.78,
+    descricao:
+      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo odit fugiat assumenda aspernatur, distinctio dicta beatae, repellendus quam illo porro earum repellat dolore, pariatur laboriosam deserunt nihil quaerat natus officia. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo odit fugiat assumenda aspernatur, distinctio dicta beatae, repellendus quam illo porro earum repellat dolore, pariatur laboriosam deserunt nihil quaerat natus officia.",
+  },
+  {
+    id: 2,
+    nome: "mequi mil",
+    image: "https://placehold.co/398x157",
+    preco: 15.78,
+    descricao:
+      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo odit fugiat assumenda aspernatur, distinctio dicta beatae, repellendus quam illo porro earum repellat dolore, pariatur laboriosam deserunt nihil quaerat natus officia. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo odit fugiat assumenda aspernatur, distinctio dicta beatae, repellendus quam illo porro earum repellat dolore, pariatur laboriosam deserunt nihil quaerat natus officia.",
+  },
+  {
+    id: 3,
+    nome: "mequi mil",
+    image: "https://placehold.co/398x157",
+    preco: 15.78,
+    descricao:
+      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo odit fugiat assumenda aspernatur, distinctio dicta beatae, repellendus quam illo porro earum repellat dolore, pariatur laboriosam deserunt nihil quaerat natus officia. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo odit fugiat assumenda aspernatur, distinctio dicta beatae, repellendus quam illo porro earum repellat dolore, pariatur laboriosam deserunt nihil quaerat natus officia.",
+  },
+];
 
-
-export interface iLojaProps{
-    params:{
-        id:string;
-    };
+export interface iLojaProps {
+  params: {
+    id: string;
+  };
 }
 
-export default function Loja({params: { id } } : iLojaProps) {
-   
-    const dados: any = use(
+export default function Loja({ params: { id } }: iLojaProps) {
+  const dados: any = use(
+    new Promise((resolve) => {
+      setTimeout(
+        () =>
+          resolve({
+            nome: "Emici Donaidis",
+            nota: 4.5,
+            categoria: "Lanches",
+            tempo: "30-40 min",
+            distancia: "1.2KM",
+            taxaEntregas: 2.25,
+          }),
+        5000
+      );
+    })
+  );
+  return (
+    <Flex
+      bg="gray.50"
+      direction="column"
+      align="center"
+      mt="1rem"
+      minH="100vh"
+      p={{ base: "0 5%", lg: "17%" }}
+    >
+      <Flex as="header" flexDir="column">
+        <Image
+          src="https://placehold.co/1200x250"
+          alt={"Imagem de capa de empresa:" + dados.nome}
+          borderRadius="10px"
+        />
 
-        new Promise((resolve) => {
-            setTimeout(
-                () => 
-            resolve({
-                nome: "Emici Donaidis",
-                nota:4.5,
-                categoria:"Lanches",
-                tempo:"30-40 min",
-                distancia:"1.2KM",
-                taxaEntregas:2.25,
-
-            }),
-            5000
-            );
-        })
-        );
-    return (
-    
-    <Flex 
-    bg="gray.50" 
-    direction="column" 
-    align="center"
-    mt="2rem"
-    minH="100vh"
-     >
-        <Flex as="header" flexDir="column">
-            <Image
-             src="https://placehold.co/1200x250"
-             alt={"Imagem de capa de empresa:" + dados.nome}
-            borderRadius= "10px"
-            />
-        
         <Flex align="center" gap="1rem" mt="2rem">
-            <Image 
-            src="https://placehold.co/100" 
+          <Image
+            src="https://placehold.co/100"
             alt={"Logo da empresa:" + dados.nome}
             borderRadius="full"
-            />
-            <Heading fontSize="1.5rem">{dados.nome}</Heading>
-            <StarRating nota={dados.nota}/>
-            <Flex ml="auto" gap={5}>
-                <Button variant="unstyled" colorScheme="red">
-                Ver Mais
-                </Button>
-                <Text as="small">
-                    <Icon as={AiFillDollarCircle} />
-                    Pedido Minimo {moneyFormat(31.00)}
-                </Text>
-            </Flex>
+          />
+          <Heading fontSize="1.5rem">{dados.nome}</Heading>
+          <StarRating nota={dados.nota} />
+          <Flex ml="auto" gap={5}>
+            <Button variant="unstyled" colorScheme="red">
+              Ver Mais
+            </Button>
+            <Text as="small">
+              <Icon as={AiFillDollarCircle} />
+              Pedido Minimo {moneyFormat(31.0)}
+            </Text>
+          </Flex>
         </Flex>
-        <Box>
-            <Heading>Produtos</Heading>
+      </Flex>
+      <Box>
+        <Box mt="2rem">
+          <Heading fontSize="lg">Destaques</Heading>
+          <Divider bg="gray.500" />
+          <Flex
+            direction={{ base: "column", md: "row" }}
+            gap={4}
+            wrap="wrap"
+            mt={5}
+          >
+            {products?.map((product, index) => (
+              <ProductCard {...product} key={index} />
+            ))}
+          </Flex>
         </Box>
-        </Flex>
-        </Flex>
-    );
-}  
-   
-    
+
+        <Box mt="2rem" w="100%">
+          <Heading fontSize="lg">Produtos</Heading>
+          <Divider bg="gray.500" />
+          
+          <Flex direction="column" gap={4} wrap="wrap" mt={5}>
+            {products?.map((product, index) => (
+              <ProductCard direction="row" {...product} key={index} />
+            ))}
+          </Flex>
+        </Box>
+      </Box>
+    </Flex>
+  );
+}

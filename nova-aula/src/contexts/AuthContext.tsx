@@ -1,16 +1,9 @@
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { iAuthContext } from "@/types/context";
 import { iSingIn, iSingUp, iUser } from "@/types/userAccess";
 import { useRouter } from "next/navigation";
-import { toast } from "react-toastify";
 import { Notify } from "@/components/Notify";
-import { login } from "@/services/login";
+import { login } from "@/services/login.service";
 
 const AuthContext = createContext<iAuthContext>({} as iAuthContext);
 
@@ -48,8 +41,8 @@ const AuthContextProvider = ({ children }: { children: ReactNode }) => {
     setUser({} as iUser);
     setIsLoged(false);
     localStorage.setItem("isLoged", "false");
-    localStorage.setItem("user", "{}")
-  }
+    localStorage.setItem("user", "{}");
+  };
 
   const iSingUp = (values: iSingUp) => {};
 
@@ -62,6 +55,3 @@ const AuthContextProvider = ({ children }: { children: ReactNode }) => {
 
 export default AuthContextProvider;
 export const useAuth = () => useContext(AuthContext);
-function setUser(arg0: any) {
-  throw new Error("Function not implemented.");
-}

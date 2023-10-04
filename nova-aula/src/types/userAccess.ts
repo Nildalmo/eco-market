@@ -1,3 +1,4 @@
+
 export interface iSingIn {
   email: string;
   senha: string;
@@ -15,3 +16,4 @@ export interface iUser{
     nome:string;
     email:string;
 }
+
